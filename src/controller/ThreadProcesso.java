@@ -6,7 +6,6 @@ public class ThreadProcesso extends Thread {
 
 	private int idProcesso;
 	private Semaphore semaforo;
-	private static int posicaoChegada;
 	private static int posicaoSaida;
 
 	public ThreadProcesso(int idProcesso, Semaphore semaforo) {
@@ -16,9 +15,8 @@ public class ThreadProcesso extends Thread {
 
 	@Override
 	public void run() {
-		
 		try {
-			ProcessoOrdem();
+			ProcessoChegou();
 			semaforo.acquire();
 			ProcessoRodando();
 		} catch (InterruptedException e) {
@@ -29,7 +27,7 @@ public class ThreadProcesso extends Thread {
 		}
 	}
 
-	private void ProcessoOrdem() {
+	private void ProcessoChegou() {
 		try {
 			sleep(1000);
 		} catch (InterruptedException e) {
@@ -50,6 +48,6 @@ public class ThreadProcesso extends Thread {
 
 	private void ProcessoFinalizou() {
 		posicaoSaida++;
-		System.out.println("#" + idProcesso + " foi o " + posicaoSaida + "o. a sair");
+		System.out.println("\n#" + idProcesso + " foi o " + posicaoSaida + "o. A FINALIZAR A EXECUÇÃO");
 	}
 }
